@@ -45,6 +45,10 @@ for node in $(oc get node -l node-role.kubernetes.io/worker -o name); do oc labe
 
 Then review the included file `StorageCluster.yaml` which defines the gp2 StorageClass requesting 512Gi, then apply the StorageCluster:
 
+***NOTE***
+***
+You should only do one of the two methods, either create the instance using the web console or the oc cli tool but not both.
+***
 ```
 oc apply -f StorageCluster.yaml -n openshift-storage
 ```
