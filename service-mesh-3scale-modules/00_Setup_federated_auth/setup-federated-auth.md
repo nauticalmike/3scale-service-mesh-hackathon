@@ -69,7 +69,7 @@ This would bring you to a GitHub form to provide the `Client ID` and `Client sec
 
 ![](../images/ocp-cluster-oauth-form.png)
 
-Don't forget to scroll down and add the organization name where you GitHub app belongs to:
+Don't forget to scroll down and add the organization name where your GitHub app belongs to:
 
 ![](../images/ocp-cluster-oauth-form2.png)
 
