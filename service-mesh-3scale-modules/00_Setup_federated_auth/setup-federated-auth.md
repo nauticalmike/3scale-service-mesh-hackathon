@@ -73,7 +73,17 @@ Don't forget to scroll down and add the organization name where your GitHub app 
 
 ![](../images/ocp-cluster-oauth-form2.png)
 
-You successfully secured your cluster with federated authentication from GitHub.
+After completing the form click on `Add` and you should see your `Identity provider` instance listed:
+
+![](../images/ocp-cluster-oauth-form3.png)
+
+Finally, logout from your current user account and try to log back in, you should see the option to login using `github` and then an `oauth` GitHub form requesting to grant access to your organization:
+
+![](../images/github-org-auth.png)
+
+Click on the green button to authorize. 
+
+Congratulations, you successfully secured your cluster with federated authentication from GitHub.
 
 ## Optional
 
