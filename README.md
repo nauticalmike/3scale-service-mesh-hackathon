@@ -1,5 +1,4 @@
-# 3scale-hackathon
+# 3scale & OpenShift Service Mesh Hackaton
 
-This set of modules and lab instructions are forked from Bernard's latest update of the 3scale Implemention & Development courses here:
-https://github.com/btison/3scale-uscellular
+The intention for this repo is to provide guidance on Openshift Service Mesh based on Istio and known configurations using 3Scale API Manager
 
