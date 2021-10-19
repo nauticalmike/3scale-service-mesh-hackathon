@@ -92,4 +92,4 @@ oc apply -f Group.yaml
 ```
 You should expect a response along the lines: `group.user.openshift.io/rhc-admins created`.
 
-The using the resource `ClusterRoleBinding` as described on the file `ClusterRoleBinding.yaml` you can bind the `admin` role to the group listing of accounts you want.
+Then using the resource `ClusterRoleBinding` as described on the file `ClusterRoleBinding.yaml` you can bind the `admin` role to the group listing of accounts you want.
