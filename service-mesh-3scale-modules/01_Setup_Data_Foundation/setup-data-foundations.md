@@ -7,15 +7,15 @@ In this lab we are going to provision OpenShift Data Foundation using the operat
 2. Have a GitHub Account
 3. OCP cluster with at least 3x MachineSets scaled up and 3x worker nodes
 
-## Install using the Operator
+## Install OpenShift Data Foundation using the Operator
 
 On the OCP web console go to the left menu `Operators` then go to `OperatorHub`:
 
-![](../images/operator-ocs-menu.png)
+![](../images/operator-hub-menu.png)
 
 In the search field search for `storage` and look for the `OpenShift Container Storage` (OCS) tile:
 
-![](../images/operator-ocs-tab.png)
+![](../images/operator-ocs-tile.png)
 
 On the new screen click on install:
 

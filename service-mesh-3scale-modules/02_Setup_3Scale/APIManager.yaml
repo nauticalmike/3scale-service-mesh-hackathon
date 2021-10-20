@@ -1,0 +1,17 @@
+apiVersion: apps.3scale.net/v1alpha1
+kind: APIManager
+metadata:
+  name: apimanager-instance
+spec:
+  system:
+    fileStorage:
+      persistentVolumeClaim:
+        storageClassName: ocs-storagecluster-cephfs
+    redisResources:
+      limits:
+        memory: 6Gi
+  backend:
+    redisResources:
+      limits:
+        memory: 6Gi
+  wildcardDomain: apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com
