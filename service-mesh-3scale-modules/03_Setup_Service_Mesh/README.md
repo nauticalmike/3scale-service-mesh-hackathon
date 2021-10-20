@@ -51,6 +51,26 @@ If using the OC CLI tool, review the file `ServiceMeshControlPlane.yaml` and app
 oc apply -f ServiceMeshControlPlane.yaml -n istio-system
 ```
 
-If a LimitRange is defined, it may prevent pods from starting if limits are too low. It may be necessary to adjust or delete.
+Watch your pods until they are ready:
+```
+oc get pods -w -n istio-system
+```
 
+and expect something like:
+```
+oc get pods -w -n istio-system
+NAME                                   READY     STATUS    RESTARTS   AGE
+grafana-76c57d9895-88jz4               2/2       Running   0          4m
+istio-egressgateway-7bd88577bd-f2fkj   1/1       Running   0          4m
+istio-ingressgateway-b5d4b99cc-ldk6d   1/1       Running   0          4m
+istio-policy-6f6b4fd589-bv7l2          2/2       Running   0          4m
+istiod-basic-6985d799ff-ln2vs          1/1       Running   0          5m
+jaeger-7c7d69bdf9-j9j2l                2/2       Running   0          4m
+prometheus-7b7fd89bb4-648nv            3/3       Running   0          5m
+```
+
+***NOTE***
+***
+If a LimitRange is defined, it may prevent pods from starting if limits are too low. It may be necessary to adjust or delete.
+***
 TODO: Research whether the LimitRange is coming from the OSSM operator and what is the best way to optimize the limits.
