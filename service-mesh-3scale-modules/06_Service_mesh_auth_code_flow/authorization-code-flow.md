@@ -102,10 +102,10 @@ $ which Postman
 ```
 Open the Postman application. If this is the first time you used Postman, expect to be greeted with a sign-up page. Feel free to skip this stage and go directly to the application:
 
-![](/use-cases/images/postman_signup_page.png)
+![](../images/postman_signup_page.png)
 
 Expect to see the landing page of the Postman application:
-![](/use-cases/images/postman_empty_home_page.png)
+![](../images/postman_empty_home_page.png)
 
 Click *Create a request*. 
 
@@ -117,13 +117,13 @@ The URL can be obtained from the following command:
 $ echo $ISTIO_GW/productpage
 ```
 
-![](/use-cases/images/postman_request_url.png)
+![](../images/postman_request_url.png)
 
 Click *Send*
 
 Expect a `401 Unauthorized` return code.
 
-![](/use-cases/images/postman_response_unauthenticated.png)
+![](../images/postman_response_unauthenticated.png)
 
 ### Configure Postman to obtain an access token from the RH-SSO server.
 
@@ -148,13 +148,13 @@ $ echo -en "\nhttps://$SSO_URL/auth/realms/$AMP_SSO_REALM/protocol/openid-connec
 * *Scope* : openid
 * *Client Authentication* : `Send as Basic Auth header`
 
-![](/use-cases/images/postman_configure_new_token.png)
+![](../images/postman_configure_new_token.png)
 
 Click *Get New Access Token*.
 
 A new dialog box appears that shows the login screen for your realm on the RH-SSO server
 
-![](/use-cases/images/postman_request_token_login.png)
+![](../images/postman_request_token_login.png)
 
 Enter the username and password of a realm user.  For now, you can just use the values of `$RHSSO_REALM_USERID` and `$RHSSO_REALM_PASSWD`. Click *Log in*.
 
@@ -162,12 +162,12 @@ A new pop-up appears that shows the details of the Access token that was obtaine
 
 Click *Use Token*
 
-![](/use-cases/images/postman_manage_access_token.png)
+![](../images/postman_manage_access_token.png)
 
 Back on the request page, click *Send*. 
 
 This time expect a successful response.
 
-![](/use-cases/images/postman_response_ok2.png)
+![](../images/postman_response_ok2.png)
 
 You have successfully secured your the `bookinfo` `productpage` using OpenID Connect Authorization code flow.
