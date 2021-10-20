@@ -17,7 +17,7 @@ On the OCP web console go to the left menu `Operators` then go to `OperatorHub`:
 
 ![](../images/operator-hub-menu.png)
 
-In the search field search for `service mesh` and look for the `OpenShift Service Mesh` (SM) tile:
+In the search field search for `service mesh` and look for the `OpenShift Service Mesh` (OSSM) tile:
 
 ![](../images/operator-sm-tile.png)
 
@@ -27,7 +27,25 @@ Create a new namespace (ns) named `istio-system` either using the web console un
 oc new-project istio-system
 ```
 
-When ready, create a Service Mesh Control Plane (SMCP) instance either using the CLI or web console as follows:
+When ready, create a Service Mesh Control Plane (SMCP) instance either using the CLI or web console. There are two important definitions in order for OSSM to work properly with 3Scale:
+
+1. Configure your control plane policy as `Mixer`:
+```
+spec:
+  policy:
+    type: Mixer
+    mixer:
+      enableChecks: true
+```
+2. Enable the 3Scale addon (adapter):
+```
+spec:
+  addons:
+    3scale:
+      enabled: true
+```
+
+If using the OC CLI tool, review the file `ServiceMeshControlPlane.yaml` and apply it as follows:
 
 ```
 oc apply -f ServiceMeshControlPlane.yaml -n istio-system
