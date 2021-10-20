@@ -19,11 +19,11 @@ On the OCP web console go to the left menu `Operators` then go to `OperatorHub`:
 
 ![](../images/operator-hub-menu.png)
 
-In the search field search for `3scale` and look for the `Red Hat Integration - 3Scale` operator tile:
+In the search field search for `3scale` and look for the `Red Hat Integration - 3Scale` operator tile and click on it:
 
 ![](../images/operator-3scale-tile.png)
 
-Then click install, in the next form make sure you select `threescale-2.11` as the update channel and install under a specific ns named `3scale`:
+On the next screen click install, in the next form make sure you select `threescale-2.11` as the update channel and install under a specific ns named `3scale`:
 
 ![](../images/operator-3scale-install.png)
 
@@ -52,7 +52,7 @@ Finally scroll down and click on the blue button `Create`. Validate you have a n
 Set the cluster wildcard domain and the Storage Class name in `APIManager.yaml` then apply it using the cli:
 
 ```
-oc apply -f 3scale/APIManager.yaml -n 3scale
+oc apply -f APIManager.yaml -n 3scale
 ```
 
 The 3Scale APIManager control plane instance should have at least 15 pods running and in ready state before you can use the instance.
