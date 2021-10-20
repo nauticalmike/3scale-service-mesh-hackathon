@@ -31,7 +31,9 @@ After the operator gets installed, monitor the `openshift-storage` ns for pods t
 oc get pods -n openshift-storage -w
 ```
 
-When all pods get ready (status == running), then you can use the operator to create a `StorageCluster` instance to be used by your applications, in our case, 3Scale. For this you can either use the OC CLI tool or you can use the form dialog after you click on the blue button in the operator details tab named `Create StorageCluster`:
+When all pods get ready (status == running), then you can use the operator to create a `StorageCluster` instance to be used by your applications, in our case, 3Scale. 
+
+For this you can either use the OC CLI tool or you can use the form dialog after you click on the blue button in the operator details tab named `Create StorageCluster`:
 
 ![](../images/operator-ocs-storagecluster.png)
 

@@ -1,0 +1,15 @@
+apiVersion: config.istio.io/v1alpha2
+kind: rule
+metadata:
+  creationTimestamp: null
+  name: basic
+  namespace: istio-system
+spec:
+  actions:
+  - handler: basic.handler.istio-system
+    instances:
+    - basic.instance.istio-system
+  match: |-
+    context.reporter.kind == "inbound" &&
+    destination.labels["service-mesh.3scale.net/credentials"] == "basic" &&
+    destination.labels["service-mesh.3scale.net/authentication-method"] == ""

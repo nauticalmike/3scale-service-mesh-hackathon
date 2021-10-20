@@ -1,0 +1,19 @@
+apiVersion: config.istio.io/v1alpha2
+kind: instance
+metadata:
+  creationTimestamp: null
+  name: basic
+  namespace: istio-system
+spec:
+  params:
+    action:
+      method: request.method | "get"
+      path: request.url_path
+      service: destination.labels["service-mesh.3scale.net/service-id"] | ""
+    subject:
+      properties:
+        app_id: 'request.query_params["app_id"] | request.headers["app_id"] | ""'
+        app_key: 'request.query_params["app_key"] | request.headers["app_key"] | ""'
+        client_id: 'request.auth.claims["azp"] | ""'
+      user: 'request.query_params["user_key"] | request.headers["user_key"] | ""'
+  template: threescale-authorization

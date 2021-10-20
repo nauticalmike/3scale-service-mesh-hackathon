@@ -1,0 +1,45 @@
+apiVersion: maistra.io/v2
+kind: ServiceMeshControlPlane
+metadata:
+  name: basic
+spec:
+  tracing:
+    sampling: 10000
+    type: Jaeger
+  policy:
+    type: Mixer
+    mixer:
+      enableChecks: true
+  addons:
+    grafana:
+      enabled: true
+    jaeger:
+      install:
+        storage:
+          type: Memory
+    kiali:
+      enabled: true
+    prometheus:
+      enabled: true
+    3scale:
+      enabled: true
+      metrics:
+        port: 8080
+        report: true
+      log_json: true
+      log_level: debug
+      listen_addr: 3333
+      client:
+        allow_insecure_connections: false
+        timeout: 10
+      system:
+        cache_max_size: 1000
+        cache_refresh_interval: 180
+        cache_refresh_retries: 1
+        cache_ttl: 300
+      log_grpc: false
+      grpc:
+        max_conn_timeout: 60
+  version: v2.0
+  telemetry:
+    type: Mixer

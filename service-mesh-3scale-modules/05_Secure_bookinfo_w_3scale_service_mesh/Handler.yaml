@@ -1,0 +1,13 @@
+apiVersion: config.istio.io/v1alpha2
+kind: handler
+metadata:
+  creationTimestamp: null
+  name: basic
+  namespace: istio-system
+spec:
+  adapter: threescale
+  connection:
+    address: dns:///threescale-istio-adapter:3333
+  params:
+    access_token: 8tXVYqmvy9q4kiWt
+    system_url: 'https://3scale-admin.apps.cluster-9ff6.9ff6.sandbox1580.opentlc.com'
