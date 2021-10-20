@@ -17,7 +17,7 @@ oc apply -f ServiceMeshMemberRoll.yaml -n istio-system
 ```
 ***NOTE***
 ***
-Make sure you create the `SMMR` instance where you have your OSSM Control Plane instance installed
+Make sure you create the `SMMR` instance where you have your OSSM Control Plane instance installed. In this example we are using the `istio-system` ns.
 ***
 
 Deploy the `bookinfo` sample app:
