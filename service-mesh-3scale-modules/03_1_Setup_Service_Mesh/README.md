@@ -83,6 +83,15 @@ jaeger                                       jaeger-istio-system.apps.cluster-f4
 kiali                                        kiali-istio-system.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com                                                  kiali                  <all>     reencrypt/Redirect   None
 prometheus                                   prometheus-istio-system.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com                                             prometheus             <all>     reencrypt/Redirect   None
 ```
+Finally check that the status of your SMCP instance is `ComponentsReady`:
+```
+oc get smcp basic -n istio-system
+```
+Expect:
+```
+NAME      READY     STATUS            PROFILES      VERSION   AGE
+basic     12/12     ComponentsReady   ["default"]   2.0.8     8h
+```
 
 Congratulations, your SMCP is up and running.
 

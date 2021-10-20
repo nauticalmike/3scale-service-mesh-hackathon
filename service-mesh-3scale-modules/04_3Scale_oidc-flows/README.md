@@ -14,7 +14,7 @@ In this lab you'll secure an API with Open ID Connect (OIDC), using Red Hat Sing
 2. Have 3scale installed
 3. Have installed the bookinfo example app on the `bookinfo` ns
 4. Have installed the RHSSO operator with a `keycloak` instance named `sso`
-5. You don't need OSSM for this lab so make sure there are no conflicting resources assigned to the bookinfo service
+5. You don't need OSSM for this lab so make sure there are no conflicting resources assigned to the bookinfo service (Virtual Service/Gateway)
 
 #
 ## Introduction
