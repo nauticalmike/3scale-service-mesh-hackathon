@@ -1,0 +1,12 @@
+apiVersion: "security.istio.io/v1beta1"
+kind: "RequestAuthentication"
+metadata:
+  name: "jwt-example"
+  namespace: bookinfo
+spec:
+  selector:
+    matchLabels:
+      app: productpage
+  jwtRules:
+  - issuer: "https://keycloak-rhsso.apps.cluster-3c7e.3c7e.sandbox1865.opentlc.com/auth/realms/master"
+    jwksUri: "https://keycloak-rhsso.apps.cluster-3c7e.3c7e.sandbox1865.opentlc.com/auth/realms/master/protocol/openid-connect/certs"

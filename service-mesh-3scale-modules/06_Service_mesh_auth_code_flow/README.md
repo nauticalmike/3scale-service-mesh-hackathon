@@ -46,7 +46,7 @@ spec:
 ```
 then create the resource:
 ```
-oc apply -f use-cases/restrict-access-jwt/request-auth.yaml -n bookinfo
+oc apply -f Request-auth.yaml -n bookinfo
 ```
 
 ## Setup the Realm clients

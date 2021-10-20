@@ -31,7 +31,7 @@ You should be able to get an HTTP 200 response code along with the `Simple Books
 
 As explained in the main lab (README.md), create the handler, the instance and the rule for the bookinfo service on the `istio-system` ns. Take a look at the instance and rule they look pretty similar and update the `handler` to include your 3scale access token and tenant URL: 
 ```
-oc apply -f use-cases/client-credentials-flow/Handler.yaml -f use-cases/client-credentials-flow/Instance.yaml -f use-cases/client-credentials-flow/Rule.yaml -n istio-system
+oc apply -f Handler.yaml -f Instance.yaml -f Rule.yaml -n istio-system
 ```
 Now create the `RequestAuthentication` resource which "tells" the Service Mesh control plane the JWT rules (issuer and URI) for the matched app label.
 Review the `request-auth.yaml` file and replace the `issuer` and `jwksUri` with the corresponding URLs from your SSO realm instance, e.g:
@@ -45,7 +45,7 @@ spec:
 ```
 then create the resource:
 ```
-oc apply -f use-cases/restrict-access-jwt/request-auth.yaml -n bookinfo
+oc apply -f Request-auth.yaml -n bookinfo
 ```
 
 ## Setup the Realm clients
