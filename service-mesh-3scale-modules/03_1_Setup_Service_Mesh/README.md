@@ -59,18 +59,36 @@ oc get pods -w -n istio-system
 and expect something like:
 ```
 oc get pods -w -n istio-system
-NAME                                   READY     STATUS    RESTARTS   AGE
-grafana-76c57d9895-88jz4               2/2       Running   0          4m
-istio-egressgateway-7bd88577bd-f2fkj   1/1       Running   0          4m
-istio-ingressgateway-b5d4b99cc-ldk6d   1/1       Running   0          4m
-istio-policy-6f6b4fd589-bv7l2          2/2       Running   0          4m
-istiod-basic-6985d799ff-ln2vs          1/1       Running   0          5m
-jaeger-7c7d69bdf9-j9j2l                2/2       Running   0          4m
-prometheus-7b7fd89bb4-648nv            3/3       Running   0          5m
+NAME                                    READY     STATUS    RESTARTS   AGE
+3scale-istio-adapter-6f7d688486-ltw2t   1/1       Running   0          3m
+grafana-76c57d9895-88jz4                2/2       Running   0          4h
+istio-egressgateway-7bd88577bd-f2fkj    1/1       Running   0          4h
+istio-ingressgateway-b5d4b99cc-ldk6d    1/1       Running   0          4h
+istio-policy-6f6b4fd589-bv7l2           2/2       Running   0          4h
+istio-telemetry-7b99847cd4-rzhbs        2/2       Running   0          3m
+istiod-basic-6985d799ff-ln2vs           1/1       Running   0          4h
+jaeger-7c7d69bdf9-j9j2l                 2/2       Running   0          4h
+kiali-7765d6ddcf-tt2w5                  1/1       Running   0          1m
+prometheus-7b7fd89bb4-648nv             3/3       Running   0          4h
 ```
+
+Make sure you have all the routes you need created for your SMCP instance:
+```
+oc get routes -n istio-system
+NAME                                         HOST/PORT                                                                                                PATH      SERVICES               PORT      TERMINATION          WILDCARD
+bookinfo-bookinfo-gateway-525eca1d5089dbdc   bookinfo-bookinfo-gateway-525eca1d5089dbdc-istio-system.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com             istio-ingressgateway   http2                          None
+grafana                                      grafana-istio-system.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com                                                grafana                <all>     reencrypt/Redirect   None
+istio-ingressgateway                         istio-ingressgateway-istio-system.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com                                   istio-ingressgateway   8080                           None
+jaeger                                       jaeger-istio-system.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com                                                 jaeger-query           <all>     reencrypt            None
+kiali                                        kiali-istio-system.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com                                                  kiali                  <all>     reencrypt/Redirect   None
+prometheus                                   prometheus-istio-system.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com                                             prometheus             <all>     reencrypt/Redirect   None
+```
+
+Congratulations, your SMCP is up and running.
 
 ***NOTE***
 ***
 If a LimitRange is defined, it may prevent pods from starting if limits are too low. It may be necessary to adjust or delete.
+
+You can adjust/delete this RangeLimit by going to `Administration` -> `LimitRanges` in the `istio-system` ns.
 ***
-TODO: Research whether the LimitRange is coming from the OSSM operator and what is the best way to optimize the limits.

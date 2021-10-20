@@ -15,11 +15,26 @@ Add the project to the SMMR so it could be discovered by your SMCP:
 ```
 oc apply -f ServiceMeshMemberRoll.yaml -n istio-system
 ```
+***NOTE***
+***
+Make sure you create the `SMMR` instance where you have your OSSM Control Plane instance installed
+***
+
 Deploy the `bookinfo` sample app:
 ```
 oc apply -f https://raw.githubusercontent.com/maistra/istio/maistra-2.1/samples/bookinfo/platform/kube/bookinfo.yaml -n bookinfo
 ```
-Now lets create a `VirtualService` and a `Gateway` in order to access the service through the mesh:
+
+Wait for the pods to be ready and then check the bookinfo's productpage service is working before exposing the services through the gateway:
+```
+oc run nc-rhel --image=registry.redhat.io/rhel7/rhel-tools -i -t --restart=Never --rm -- /bin/sh -c 'curl http://productpage.bookinfo.svc.cluster.local:9080/productpage' | grep '<title>Simple Bookstore App</title>'
+```
+You should expect a response along the lines of:
+```
+<title>Simple Bookstore App</title>
+```
+
+Now lets create a `VirtualService` and a `Gateway` instances for bookinfo in order to access the service through the mesh:
 ```
 oc apply -f https://raw.githubusercontent.com/maistra/istio/maistra-2.1/samples/bookinfo/networking/bookinfo-gateway.yaml -n bookinfo
 ```
@@ -36,7 +51,12 @@ echo $ISTIO_GW
 
 You can now verify that the bookinfo service is responding:
 ```
-curl -v $ISTIO_GW/productpage
+curl $ISTIO_GW/productpage | grep '<title>Simple Bookstore App</title>'
+```
+
+You should expect a response along the lines of:
+```
+<title>Simple Bookstore App</title>
 ```
 
 Congratulations, you successfully tested your SMCP.
