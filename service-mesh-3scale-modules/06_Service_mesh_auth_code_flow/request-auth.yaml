@@ -8,5 +8,5 @@ spec:
     matchLabels:
       app: productpage
   jwtRules:
-  - issuer: "http://keycloak-insecure-rhsso.apps.cluster-c957.c957.sandbox749.opentlc.com/auth/realms/threescale-realm"
-    jwksUri: "http://keycloak-insecure-rhsso.apps.cluster-c957.c957.sandbox749.opentlc.com/auth/realms/threescale-realm/protocol/openid-connect/certs"
+  - issuer: "https://keycloak-rhsso.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com/auth/realms/threescale-realm"
+    jwksUri: "https://keycloak-rhsso.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com/auth/realms/threescale-realm/protocol/openid-connect/certs"

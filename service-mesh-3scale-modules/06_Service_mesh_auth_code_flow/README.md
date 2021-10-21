@@ -103,8 +103,10 @@ The application page should state the client ID and secret under the API Credent
 ```
 https://www.getpostman.com/oauth2/callback
 ```
+![](../images/amp-bookinfo-create-app2.png)
 
-If everything worked as expected, you can double check this same client ID under the list of clients in your realms client list on the keycloak's console. 
+If everything worked as expected, you can double check this same client ID under the list of clients in your realms client list on the keycloak's console:
+![](../images/sso-bookinfo-client-id.png)
 
 Save the client ID and secret under the API Credentials by exporting them to terminal variables, e.g:
 ```
@@ -150,6 +152,11 @@ then create the resource:
 ```
 oc apply -f Request-auth.yaml -n bookinfo
 ```
+Expect a response:
+```
+requestauthentication.security.istio.io/jwt-example created
+```
+
 #
 ## Test the API with Authorization Code flow.
 
@@ -172,7 +179,7 @@ Enter the URL to the production APIcast of the _Products API OIDC_ application i
 The URL can be obtained from the following command:
 
 ```
-$ echo $ISTIO_GW/productpage
+echo $ISTIO_GW/productpage
 ```
 
 ![](../images/postman_request_url.png)
@@ -195,11 +202,11 @@ Enter the following values into the *Configure New Token* dialog box:
 * *Callback URL*: `https://www.getpostman.com/oauth2/callback`
 * *Auth URL*: Use the following command to get the URL:
 ```
-$ echo -en "\nhttps://$SSO_URL/auth/realms/$AMP_SSO_REALM/protocol/openid-connect/auth\n\n"
+echo -en "\nhttps://$SSO_URL/auth/realms/$AMP_SSO_REALM/protocol/openid-connect/auth\n\n"
 ```
 * *Access Token URL*: Use the following command to get the URL:
 ```
-$ echo -en "\nhttps://$SSO_URL/auth/realms/$AMP_SSO_REALM/protocol/openid-connect/token\n\n"
+echo -en "\nhttps://$SSO_URL/auth/realms/$AMP_SSO_REALM/protocol/openid-connect/token\n\n"
 ```
 * *ClientID*: The value of `$SSO_CLIENT_ID`
 * *Client Secret*: The value of `$SSO_CLIENT_SECRET`
@@ -228,4 +235,4 @@ This time expect a successful response.
 
 ![](../images/postman_response_ok2.png)
 
-You have successfully secured your the `bookinfo` `productpage` using OpenID Connect Authorization code flow.
+Congratulations! You have successfully secured your the `bookinfo` `productpage` using OpenID Connect Authorization code flow.
