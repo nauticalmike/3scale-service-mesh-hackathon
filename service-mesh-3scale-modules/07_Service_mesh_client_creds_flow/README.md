@@ -24,10 +24,16 @@ curl -v $ISTIO_GW/productpage
 ```
 You should see an HTTP 401 Unauthorized response.
 
-Now lets try with the user-key token from 3scale product app:
+Now lets try getting a token like on the previous lab using postman and then export it to a shell variable `TKN`:
 ```
-curl -v $ISTIO_GW/productpage?user_key=$USERKEY | grep '<title>Simple Bookstore App</title>'
+export TKN=eyJhbGciOiJSUz...
 ```
+
+Then use it on the following `curl` command:
+```
+curl -v -H "Accept: application/json" -H "Authorization: Bearer $TKN" $ISTIO_GW/productpage
+```
+
 You should be able to get an HTTP 200 response code along with the `Simple Bookstore App` title.
 
 ## Validate Service Mesh resources for bookinfo
