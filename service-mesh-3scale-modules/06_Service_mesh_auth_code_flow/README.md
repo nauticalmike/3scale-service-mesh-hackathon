@@ -89,6 +89,7 @@ Finally make sure the checkbox that reads `Authorization Code Flow` is checked a
 ![](../images/amp-bookinfo-auth2.png)
 
 This would trigger for you product integration configuration to be updated:
+
 ![](../images/amp-bookinfo-auth3.png)
 
 Click on `Configuration` and click the blue button `Update Configuration`.
