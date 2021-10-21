@@ -107,6 +107,7 @@ https://www.getpostman.com/oauth2/callback
 ![](../images/amp-bookinfo-create-app2.png)
 
 If everything worked as expected, you can double check this same client ID under the list of clients in your realms client list on the keycloak's console:
+
 ![](../images/sso-bookinfo-client-id.png)
 
 Save the client ID and secret under the API Credentials by exporting them to terminal variables, e.g:
