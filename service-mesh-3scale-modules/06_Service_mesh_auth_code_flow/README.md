@@ -113,7 +113,7 @@ If everything worked as expected, you can double check this same client ID under
 Save the client ID and secret under the API Credentials by exporting them to terminal variables, e.g:
 ```
 export SSO_CLIENT_ID=4cedb1d3
-export SSO_CLIENT_SECRET=184d6e7dc3415c73081b087e1f11e930
+export SSO_CLIENT_SECRET=<REALM-CLIENT-SECRET>
 export SSO_URL=keycloak-rhsso.apps.cluster-c957.c957.sandbox749.opentlc.com
 ```
 #
@@ -237,4 +237,4 @@ This time expect a successful response.
 
 ![](../images/postman_response_ok2.png)
 
-Congratulations! You have successfully secured your the `bookinfo` `productpage` using OpenID Connect Authorization code flow.
+Congratulations! You have successfully secured your the `bookinfo` `productpage` using OIDC OAuth2 `Authorization code` flow.

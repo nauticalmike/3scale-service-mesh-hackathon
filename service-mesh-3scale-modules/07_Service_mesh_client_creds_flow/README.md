@@ -75,7 +75,7 @@ Go to the previously created Application and click on `Regenerate`:
 Save the client ID and secret under the API Credentials by exporting them to terminal variables, e.g:
 ```
 export SSO_CLIENT_ID=ca011c96
-export SSO_CLIENT_SECRET=184d6e7dc3415c73081b087e1f11e930
+export SSO_CLIENT_SECRET=<REALM-CLIENT-SECRET>
 export SSO_URL=keycloak-rhsso.apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com
 ```
 Now you can test getting a token from your keycloak instance, using the user credentials, client ID and secret as follows:
@@ -108,7 +108,7 @@ curl -v -H "Accept: application/json" -H "Authorization: Bearer $TKN" $ISTIO_GW/
 ```
 You should receive a 200 response code along with the header `Authorization` and value `Bearer $TKN` including the productpage payload.
 
-Congratulations! You successfully secured the `bookinfo` `productpage` service using the OAuth2 `Client Credentials` flow.
+Congratulations! You successfully secured the `bookinfo` `productpage` service using the OIDC OAuth2 `Client Credentials` flow.
 
 ***NOTE***
 ***
