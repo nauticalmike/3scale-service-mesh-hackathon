@@ -14,4 +14,4 @@ spec:
     redisResources:
       limits:
         memory: 6Gi
-  wildcardDomain: apps.cluster-f4ea.f4ea.sandbox1246.opentlc.com
+  wildcardDomain: apps.cluster-d4n8k.d4n8k.sandbox1183.opentlc.com
