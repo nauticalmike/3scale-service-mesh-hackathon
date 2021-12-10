@@ -1,0 +1,46 @@
+apiVersion: maistra.io/v1
+kind: ServiceMeshExtension
+metadata:
+  name: threescale-auth
+spec:
+  image: quay.io/3scale/threescale-wasm-auth:qe
+  phase: PostAuthZ
+  priority: 100
+  workloadSelector:
+    labels:
+      app: productpage
+  config:
+    api: v1
+    system:
+      name: system-name
+      upstream:
+        name: >-
+          outbound|80||3scale-admin.apps.cluster-d4n8k.d4n8k.sandbox1183.opentlc.com
+        url: 'http://3scale-admin.apps.cluster-d4n8k.d4n8k.sandbox1183.opentlc.com'
+        timeout: 5000
+      token: xoqAkxdJwDSKLdpU
+    backend:
+      name: backend-name
+      upstream:
+        name: >-
+          outbound|80||backend-3scale.apps.cluster-d4n8k.d4n8k.sandbox1183.opentlc.com
+        url: 'http://backend-3scale.apps.cluster-d4n8k.d4n8k.sandbox1183.opentlc.com'
+        timeout: 5000
+      extensions:
+      - no_body
+    services:
+    - id: '3'
+      token: 8e9c1f8715a3b9b6557f751f30774d0e05ac9a921ae763f74e124f939d038baa
+      authorities:
+      - "*"
+      credentials:
+        user_key:
+          - query_string:
+              keys:
+                - user_key
+      mapping_rules:
+      - method: GET
+        pattern: "/"
+        usages:
+        - name: Hits
+          delta: 1

@@ -1,0 +1,28 @@
+---
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: threescale-backend
+spec:
+  hosts:
+  - backend-3scale.apps.cluster-d4n8k.d4n8k.sandbox1183.opentlc.com
+  ports:
+  - number: 80
+    name: https
+    protocol: HTTP
+  location: MESH_EXTERNAL
+  resolution: DNS
+---
+apiVersion: networking.istio.io/v1beta1
+kind: ServiceEntry
+metadata:
+  name: threescale-system
+spec:
+  hosts:
+  - 3scale-admin.apps.cluster-d4n8k.d4n8k.sandbox1183.opentlc.com
+  ports:
+  - number: 80
+    name: https
+    protocol: HTTP
+  location: MESH_EXTERNAL
+  resolution: DNS
