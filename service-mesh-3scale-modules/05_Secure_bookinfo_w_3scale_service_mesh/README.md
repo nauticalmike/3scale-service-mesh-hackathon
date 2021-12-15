@@ -1,16 +1,21 @@
-# Secure the Bookinfo App Using OSSM
+# Secure the Bookinfo App Using OSSM and 3scale
 
 The goal for this lab is to use the `bookinfo` app and secure it using OSSM and 3Scale with the API Manager serving as Control plane and the Istio's Ingress gateway to access the service. 
 
 ## Prerequisites
 
 1. Have an OpenShift (OCP) v4.x running cluster
-2. Have SMCP working instance
+2. Have SMCP working instance (OSSM v2.0 not 2.1 as Mixer is required)
 3. Have the `bookinfo` example app deployed, including the VirtualService and Gateway.
 
 ## Generate Handler, Rule and Instance Resources
 
 When we provisioned our SMCP instance, we enabled the 3Scale addon (adapter) which includes an utility to generate the `Handler`, `Instance` and `Rule` Service Mesh resources, in order to be used in conjunction with 3Scale's control plane the API Manager.
+
+***NOTE***
+***
+On the previous 3scale release v2.10 and OSSM v2.0 the 3scale/OSSM integration was done using the 3scale adapter, which uses gRPC to communicate with the OSSM CP Mixer component for policy enforcement. In OSSM v2.1 the Mixer component was completely removed and now in favor of the `ServiceMeshExtension` using WebAssembly.
+***
 
 To generate these resources export the following to variables:
 1. The ns where your SMCP instance resides:
@@ -31,6 +36,12 @@ And export it:
 ```
 export TOKEN="<3SCALE-ADMIN-ACCESS-TOKEN>"
 ```
+
+***NOTE***
+***
+The 3scale/OSSM integration uses the 3scale adapter, which uses gRPC to communicate with the OSSM CP Mixer component for policy enforcement. The following instructions are only for 3scale v2.10 and OSSM v2.0 using the Mixer component.
+***
+
 5. Execute the `3scale-config-gen` script as follows:
 ```
 oc exec -n ${NS} $(oc get po -n ${NS} -o jsonpath='{.items[?(@.metadata.labels.app=="3scale-istio-adapter")].metadata.name}') \

@@ -11,6 +11,11 @@ In this lab we are going to provision a Service Mesh control plane (SMCP) instan
     - Install Jaeger operator in all namespaces
     - Install Kiali operator in all namespaces
 
+***NOTE***
+***
+On the previous 3scale release v2.10 and OSSM v2.0 the 3scale/OSSM integration was done using the 3scale adapter, which uses gRPC to communicate with the OSSM CP Mixer component for policy enforcement. In OSSM v2.1 the Mixer component was completely removed and now in favor of the `ServiceMeshExtension` using WebAssembly.
+***
+
 ## Install OpenShift Service Mesh (SM) using the Operator
 
 On the OCP web console go to the left menu `Operators` then go to `OperatorHub`:
@@ -26,6 +31,11 @@ Create a new namespace (ns) named `istio-system` either using the web console un
 ```
 oc new-project istio-system
 ```
+
+***NOTE***
+***
+The 3scale/OSSM integration uses the 3scale adapter, which uses gRPC to communicate with the OSSM CP Mixer component for policy enforcement. The following instructions are only for 3scale v2.10 and OSSM v2.0 using the Mixer component.
+***
 
 When ready, create a Service Mesh Control Plane (SMCP) instance either using the CLI or web console. There are two important definitions in order for OSSM to work properly with 3Scale:
 
