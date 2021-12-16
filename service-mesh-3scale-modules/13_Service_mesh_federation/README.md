@@ -91,38 +91,38 @@ security:
 ## Testing
 Run the following command in the mesh1 cluster to check the connection status:
 ```
-  oc -n mesh1-system get servicemeshpeer mesh2 -o json | jq .status
+  oc --kubeconfig="${MESH1_KUBECONFIG}" -n mesh1-system get servicemeshpeer mesh2 -o json | jq .status
 ```
 
 Run the following command to check the connection status in mesh2:
 ```
-  oc -n mesh2-system get servicemeshpeer mesh1 -o json | jq .status
+  oc --kubeconfig="${MESH2_KUBECONFIG}" -n mesh2-system get servicemeshpeer mesh1 -o json | jq .status
 ```
 
 Check if services from mesh1 are imported into mesh2:
 ```
-  oc -n mesh2-system get importedservicesets mesh1 -o json | jq .status
+  oc --kubeconfig="${MESH2_KUBECONFIG}" -n mesh2-system get importedservicesets mesh1 -o json | jq .status
 ```
 
 To see federation in action, use the bookinfo app in mesh2. For example:
 
   1. Run this command in the mesh1 cluster: 
     ```
-    oc logs -n mesh1-bookinfo deploy/ratings-v2 -f
+    oc --kubeconfig="${MESH1_KUBECONFIG}" logs -n mesh1-bookinfo deploy/ratings-v2 -f
     ```
 
   2. Run this command in the mesh2 cluster: 
     ```
-    oc logs -n mesh2-bookinfo deploy/ratings-v2 -f
+    oc --kubeconfig="${MESH2_KUBECONFIG}" logs -n mesh2-bookinfo deploy/ratings-v2 -f
     ```
 
   3. Open in a browser and refresh:
     ```
-    http://$(oc2 -n mesh2-system get route istio-ingressgateway -o json | jq -r .spec.host)/productpage
+    http://$(oc --kubeconfig="${MESH2_KUBECONFIG}" -n mesh2-system get route istio-ingressgateway -o json | jq -r .spec.host)/productpage
     ```
     or get the hostname URL and do step #4:
     ```
-    ISTIO_GW=$(oc2 get route istio-ingressgateway -n mesh2-system -o jsonpath="{.spec.host}{.spec.path}")
+    ISTIO_GW=$(oc --kubeconfig="${MESH2_KUBECONFIG}" get route istio-ingressgateway -n mesh2-system -o jsonpath="{.spec.host}{.spec.path}")
     ```
 
   4. Refresh the page several times and observe requests hitting either the mesh1 or the mesh2 cluster:
