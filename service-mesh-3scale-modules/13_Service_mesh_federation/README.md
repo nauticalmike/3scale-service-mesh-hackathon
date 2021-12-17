@@ -65,27 +65,46 @@ Finally the script deploys `bookinfo` on each mesh, setups `DestinationRule`(s) 
 
 ***NOTE***
 ***
-Pay special attention to the certificate management required  to setup federation between to SMCP. We extract the CA root cert from each SMCP and set it up as a `configmap` on the opposite mesh to be used by the the corresponding `ServiceMeshPeer` as a certificate chain to be able to access the mesh:
+Pay special attention to the certificate management required  to setup federation between to SMCP. We extract the CA root cert from each SMCP and set it up as a `configmap` on the opposite mesh to be used by the the corresponding `ServiceMeshPeer` as a certificate chain to be able to access the mesh as follows:
 
-```
-security:
-    trustDomain: mesh2.local
-    clientID: mesh2.local/ns/mesh2-system/sa/mesh1-egress-service-account
+1. First we extract the certs:
+    ```
+    oc1 extract configmap/istio-ca-root-cert -n mesh1-system --to=- > import/mesh1_cert.pem
+    ```
+    ```
+    oc2 extract configmap/istio-ca-root-cert -n mesh2-system --to=- > export/mesh2_cert.pem
+    ```
+
+2. then we patch the configmaps:
+    ```
+    oc1 create cm mesh2-ca-root-cert -n mesh1-system --from-file=root-cert.pem=export/mesh2_cert.pem --dry-run=client -oyaml | oc1 apply -f -
+    ```
+    ```
+    oc2 create cm mesh1-ca-root-cert -n mesh2-system --from-file=root-cert.pem=import/mesh1_cert.pem --dry-run=client -oyaml | oc2 apply -f -
+    ```
+
+3. Then the `ServiceMeshPeer` instances are created referencing the configmaps:
+    ```
+    security:
+        trustDomain: mesh2.local
+        clientID: mesh2.local/ns/mesh2-system/sa/mesh1-egress-service-account
     # same as default, if certificateChain is omitted
-    certificateChain:
-      kind: ConfigMap
-      name: mesh2-ca-root-cert
-```
-and
-```
-security:
-    trustDomain: mesh1.local
-    clientID: mesh1.local/ns/mesh1-system/sa/mesh2-egress-service-account
+        certificateChain:
+          kind: ConfigMap
+          name: mesh2-ca-root-cert
+    ```
+    and
+    ```
+    security:
+        trustDomain: mesh1.local
+        clientID: mesh1.local/ns/mesh1-system/sa/mesh2-egress-service-account
     # same as default, if certificateChain is omitted
-    certificateChain:
-      kind: ConfigMap
-      name: mesh1-ca-root-cert
-```
+        certificateChain:
+          kind: ConfigMap
+          name: mesh1-ca-root-cert
+    ```
+
+4. Finally, the `ImportedServiceSet` and `ExportedServiceSet` instances are created.
 ***
 
 ## Testing
